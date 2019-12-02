@@ -9,8 +9,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var moveUp = false
+    
     var body: some View {
-        Text("Hello, World!")
+        ZStack {
+            Color.gray.edgesIgnoringSafeArea(.all)
+            Text("Slide up to open")
+                .foregroundColor(.white)
+                .fontWeight(.bold)
+                .offset(y: moveUp ? 400 : 450)
+            .animation(Animation
+                .easeOut(duration: 2)
+                .delay(2)
+                .repeatCount(50, autoreverses: false)
+            )
+                .onAppear() {
+                    self.moveUp.toggle()
+            }
+        }
     }
 }
 
